@@ -27,28 +27,24 @@ Prefix:
 catalyst mapping:
 
 ```
-Construct {
-    ?s ?z ?o.
-    ?s rdfs:label ?s_l .
-    ?o rdfs:label ?o_l .
-    ?z rdfs:label ?z_l .
-    ?o rdf:type ?o_t .
-    ?s rdf:type ?s_t .
-    ?z rdf:type ?z_t .
-}
-Where {
-    ?x rdfs:label 'hasReactionComponent' .
-    ?y rdfs:label 'isPotentiallyCatalysedBy' .
-    ?z rdfs:label 'hasCatalyst' .
-    ?z rdfs:label ?z_l .
-    ?s ?x ?o .
-    ?s ?y ?o .
-    ?s rdfs:label ?s_l .
-    ?o rdfs:label ?o_l .
-    ?o rdf:type ?o_t .
-    ?s rdf:type ?s_t .
-    ?z rdf:type ?z_t .
-}
+		INSERT {?s ?z ?o.
+		    ?s rdfs:label ?s_l .
+		    ?o rdfs:label ?o_l .
+		    ?z rdfs:label ?z_l .
+		    ?o rdf:type ?o_t .
+		    ?s rdf:type ?s_t .
+		    ?z rdf:type ?z_t .}
+		Where {?x rdfs:label 'hasReactionComponent' .
+		    ?y rdfs:label 'isPotentiallyCatalysedBy' .
+		    ?z rdfs:label 'hasCatalyst' .
+		    ?z rdfs:label ?z_l .
+		    ?s ?x ?o .
+		    ?s ?y ?o .
+		    ?s rdfs:label ?s_l .
+		    ?o rdfs:label ?o_l .
+		    ?o rdf:type ?o_t .
+		    ?s rdf:type ?s_t .
+		    ?z rdf:type ?z_t .}
 ```
 
 assignment desired_product_role:
