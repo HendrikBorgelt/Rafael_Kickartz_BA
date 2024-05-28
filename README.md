@@ -1,7 +1,7 @@
 Readme von Rafael
 
 ```
-CONSTRUCT{ 	
+CONSTRUCT{ 	
 	?x some A_1.
 	?y some A_3.
 	?z some A_2 .
