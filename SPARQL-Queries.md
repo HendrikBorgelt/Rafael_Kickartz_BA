@@ -49,6 +49,23 @@ assignment heterogeneous_catalyst_role:
                         ?HetKat :isCatalystSampleOf ?reaction . }
 ```
 
+assignment of whether the reaction is single-phase or multiphase
+
+```
+	            INSERT { ?Reaction :hasSpecification :multiphase_reaction .}
+                WHERE { {?Experiment rdf:type :CatalysisPerfomanceAssay .} UNION {?Experiment rdf:type ontologies:reac4cat_000059 .}
+                         ?Experiment :hasReaction ?Reaction .
+		                 ?Reactor rdf:type :TubeReactorWithFixedBed . #:ReactorForMultiphaseSystems in Protégé
+                         FILTER NOT EXITSTS {?Reactor :isPartOf ?Reaction .}}
+
+	                INSERT { ?Reaction :hasSpecification :single_phase_reaction .}
+                    WHERE { {?Experiment rdf:type :CatalysisPerfomanceAssay .} UNION {?Experiment rdf:type ontologies:reac4cat_000059 .}
+                             ?Experiment :hasReaction ?Reaction .
+		                     ?Reactor rdf:type :ReactorForSinglePhaseSystems .
+                             FILTER NOT EXITSTS {?Reactor :isPartOf ?Reaction .}}
+
+```
+
 explicit reaction mapping:
 ```
 catalysed FTS:
@@ -292,4 +309,51 @@ catalysed FTS:
                             ?Reaction ontologies:reac4cat_000007 ?water .
                             FILTER NOT EXISTS {?Reaction ontologies:reac4cat_000003 ?Catalyst}
                             FILTER NOT EXISTS {?Reaction :hasFirstReaction :methanation_reaction_ind}}
+```
+implicit reaction mapping:
+```
+        INSERT { ?Reaction :hasFirstReaction ?FirstReaction .}
+            WHERE { ?ExperimentClasses rdfs:subClassOf obo:OBI_0000070 .
+                    ?Experiment rdf:type ?ExperimentClass .
+                    ?Experiment :hasReaction ?Reaction .
+                    
+                    ?Reaction ontologies:reac4cat_000005 ?ReactionEduct .
+                    ?Reaction ontologies:reac4cat_000007 ?ReactionProduct .
+                    {?Reaction ontologies:reac4cat_000003 ?ReactionCatalyst .} UNION {?ReactionCatalyst rdfs:label "NoCatalyst" .}
+                    
+                    ?FirstReaction rdf:type obo:MOP_0000543 .
+                    MINUS {?Experiment :hasReaction ?FirstReaction .}
+                    ?FirstReaction ontologies:reac4cat_000005 ?FirstReactionEduct .
+                    ?FirstReaction ontologies:reac4cat_000007 ?FirstReactionProduct .
+                    ?FirstReaction ontologies:reac4cat_000003 ?FirstReactionCatalyst .
+                    
+                    FILTER (?ReactionEduct = ?FirstReactionEduct)
+                    FILTER (?ReactionProduct = ?FirstReactionProduct)
+                    FILTER (?ReactionCatalyst = ?FirstReactionCatalyst)
+                    }  
+```
+
+Competency questions:
+	- Which experiments use a continuous mode of operation?
+ 	- Which reactions produce ethanol?
+	- What methods are used to synthesise a catalyst in experiments where a Fischer-Tropsch reaction takes place?
+```
+        SELECT DISTINCT ?Exp
+        WHERE { ?Exp :hasReaction ?Reac
+                ?ContOpMode rdf:type :ContinuousOperatingMode .
+                ?ContOpMode ?property ?Reac
+                }
+
+        SELECT DISTINCT ?Reac
+        WHERE { ?Reac ontologies:reac4cat_000008 ?ProdCompSet .
+                ?ProdCompSet ?property :Substance_C2H6O .
+                }
+
+        SELECT DISTINCT ?Methods
+        WHERE { ?Exp :hasReaction ?Reac .
+                ?Reac ?property ?FTS .        
+                {?FTS rdf:type obo:RXNO_0000271.} UNION {?FTS rdf:type :CatalysedFischerTropschProcess .}
+                ?CatSynt :isPartOf ?Exp.
+                ?CatSynt :hasMethod ?Methods.
+                }
 ```
