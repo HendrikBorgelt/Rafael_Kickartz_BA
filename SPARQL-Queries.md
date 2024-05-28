@@ -339,7 +339,7 @@ catalysed FTS:
 ```
 implicit reaction mapping:
 ```
-        INSERT { ?Reaction :hasFirstReaction ?FirstReaction .}
+        CONSTRUCT { ?Reaction :hasFirstReaction ?FirstReaction .}
             WHERE { ?ExperimentClasses rdfs:subClassOf obo:OBI_0000070 .
                     ?Experiment rdf:type ?ExperimentClass .
                     ?Experiment :hasReaction ?Reaction .
