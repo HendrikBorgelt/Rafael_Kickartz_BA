@@ -77,7 +77,7 @@ catalysed FTS:
 	                ?Reaction ontologies:reac4cat_000003 ?Catalyst .
 	                FILTER NOT EXISTS {?Reaction :hasFirstReaction :catalysed_fischer_tropsch_process_ind}}
 
-FTS:
+#FTS:
         INSERT {?Reaction :hasFirstReaction :fischer_tropsch_process_ind}
         WHERE {?Experiment rdf:type :CatalysisPerfomanceAssay .
             ?Experiment :hasReaction ?Reaction .
@@ -103,7 +103,7 @@ FTS:
             FILTER NOT EXISTS {?Reaction ontologies:reac4cat_000003 ?Catalyst}
             FILTER NOT EXISTS {?Reaction :hasFirstReaction :fischer_tropsch_process_ind}}
 
-Hyfo:
+#Hyfo:
 	    INSERT { ?Reaction :hasFirstReaction :hydroformylation_ind .}
         WHERE { ?Experiment rdf:type :CatalysisPerfomanceAssay .
                 ?Experiment :hasReaction ?Reaction .
@@ -139,7 +139,7 @@ Hyfo:
 		        {?Reaction ontologies:reac4cat_000003 ?Cobalt .} UNION {?Reaction ontologies:reac4cat_000003 ?Rhodium .}
 		        FILTER NOT EXISTS {?Reaction :hasFirstReaction :hydroformylation_ind}}
 
-Cativa process:
+#Cativa process:
 
 	    INSERT { ?Reaction :hasFirstReaction :cativa_process_ind .}
         WHERE { ?Experiment rdf:type :CatalysisPerfomanceAssay .
@@ -162,7 +162,7 @@ Cativa process:
 		        ?Reaction ontologies:reac4cat_000003 ?Iridium .
 		        FILTER NOT EXISTS {?Reaction :hasFirstReaction :cativa_process_ind}}
 
-Monsanto process:
+#Monsanto process:
 
 	    INSERT { ?Reaction :hasFirstReaction :monsanto_process_ind .}
         WHERE { ?Experiment rdf:type :CatalysisPerfomanceAssay .
@@ -185,7 +185,7 @@ Monsanto process:
 		        ?Reaction ontologies:reac4cat_000003 ?Rhodium .
 		        FILTER NOT EXISTS {?Reaction :hasFirstReaction :monsanto_process_ind}}
 
-catalysed Haber-Bosch:
+#catalysed Haber-Bosch:
 
     	    INSERT { ?Reaction :hasFirstReaction :catalysed_haber_bosch_reaction_ind .}
             WHERE { ?Experiment rdf:type :CatalysisPerfomanceAssay .
@@ -210,7 +210,7 @@ catalysed Haber-Bosch:
                     ?Reaction ontologies:reac4cat_000003 ?Catalyst .
                     FILTER NOT EXISTS {?Reaction :hasFirstReaction :catalysed_haber_bosch_reaction_ind}}
 
-Haber-Bosch:
+#Haber-Bosch:
 
             INSERT {?Reaction :hasFirstReaction :haber_bosch_reaction_ind}
             WHERE {?Experiment rdf:type :CatalysisPerfomanceAssay .
@@ -235,7 +235,7 @@ Haber-Bosch:
                 FILTER NOT EXISTS {?Reaction ontologies:reac4cat_000003 ?Catalyst}
                 FILTER NOT EXISTS {?Reaction :hasFirstReaction :haber_bosch_reaction_ind}}
 
-catalysed Methanation:
+#catalysed Methanation:
 
     	    INSERT { ?Reaction :hasFirstReaction :catalysed_methanation_reaction_ind .}
             WHERE { ?Experiment rdf:type :CatalysisPerfomanceAssay .
@@ -264,7 +264,7 @@ catalysed Methanation:
                     ?Reaction ontologies:reac4cat_000003 ?Catalyst .
                     FILTER NOT EXISTS {?Reaction :hasFirstReaction :catalysed_methanation_reaction_ind}}
 
-Methanation:
+#Methanation:
 
                 INSERT {?Reaction :hasFirstReaction :methanation_reaction_ind}
                 WHERE {?Experiment rdf:type :CatalysisPerfomanceAssay .
